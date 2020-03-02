@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using FoodTrack.DataAccess.Entities;
 using Syncfusion.XlsIO;
 using static FoodTrack.Enums.EnumsModel;
@@ -29,7 +30,7 @@ namespace FoodTrack.Services
             switch (order.CategoryId) {
                 case (int)CategoryType.Groceries:
                     {
-                        basePath = @"C:\Users\Florencia.RojasAmaya\Documents\FoodTracking\FoodTrack\ExcelFiles\Woolworths-list.xlsx";
+                        basePath = @"C:\Users\Florencia.RojasAmaya\Documents\FoodTracking\FoodTrack\ExcelFiles\Groceries.xlsx";
                         break;
                     };
                 case (int)CategoryType.SausageDay:
@@ -96,27 +97,34 @@ namespace FoodTrack.Services
             string ContentType = "Application/msexcel";
 
             //Define the file name.
-            string fileName = "Order-list-"+order.CreatedAt+".xlsx";
-            var path = @"C:\files";
+            string fileName = "Order-list-"+order.Id+".xlsx";
+            var path = @"C:\files\";
 
             //Save the workbook in file system as XLSX format
             SaveStreamAsFile(path, stream, fileName);
 
-            return path + fileName;
+            return path+ fileName;
         }
 
         public static void SaveStreamAsFile(string filePath, Stream inputStream, string fileName)
         {
-            DirectoryInfo info = new DirectoryInfo(filePath);
-            if (!info.Exists)
+            try
             {
-                info.Create();
-            }
 
-            string path = Path.Combine(filePath, fileName);
-            using (FileStream outputFileStream = new FileStream(path, FileMode.Create))
-            {
-                inputStream.CopyTo(outputFileStream);
+                DirectoryInfo info = new DirectoryInfo(filePath);
+                if (!info.Exists)
+                {
+                    info.Create();
+                }
+
+                string path = Path.Combine(filePath, fileName);
+                using (FileStream outputFileStream = new FileStream(path, FileMode.Create))
+                {
+                    inputStream.CopyTo(outputFileStream);
+                }
+            }
+            catch (Exception ex) {
+                inputStream.Dispose();
             }
         }
 

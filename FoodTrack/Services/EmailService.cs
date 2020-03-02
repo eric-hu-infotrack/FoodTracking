@@ -19,17 +19,17 @@ namespace FoodTrack.Services
                 string file = excelPath;
                 MailMessage mail = new MailMessage();
                 SmtpClient SmtpServer = new SmtpClient(_configuration.GetSection("EmailSettings").GetSection("Host").Value);
-                mail.From = new MailAddress(_configuration.GetSection("EmailSettings").GetSection("EmailFrom").Value);
+                mail.From = new MailAddress(_configuration.GetSection("EmailSettings").GetSection("MailFrom").Value);
                 mail.To.Add("florenciarojasamaya@gmail.com"); // Sending MailTo  
                 mail.Subject = "Shopping List - "+ name; // Mail Subject  
-                mail.Body = "Sales Report *This is an automatically generated email, please do not reply*";
+                mail.Body = "*This is an automatically generated email, please do not reply*";
                 var attachment = new Attachment(file); //Attaching File to Mail  
                 mail.Attachments.Add(attachment);
                 SmtpServer.Port = Convert.ToInt32(_configuration.GetSection("EmailSettings").GetSection("Port").Value); //PORT  
-                SmtpServer.EnableSsl = true;
-                SmtpServer.DeliveryMethod = SmtpDeliveryMethod.Network;
                 SmtpServer.UseDefaultCredentials = false;
-                SmtpServer.Credentials = new NetworkCredential("foodtrck.infotrack", "foodtrack123");
+                SmtpServer.DeliveryMethod = SmtpDeliveryMethod.Network;
+                SmtpServer.Credentials = new NetworkCredential("foodtrack.infotrack", "foodtrack123");
+                SmtpServer.EnableSsl = true;
                 SmtpServer.Send(mail);
                 return true;
             }

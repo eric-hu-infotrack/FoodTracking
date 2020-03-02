@@ -20,8 +20,7 @@ namespace FoodTrack.Controllers
         }
 
         [HttpGet]
-        public IActionResult Post()
-        {
+        public IActionResult Post(){
             try
             {
                 //Defining the ContentType for excel file.
@@ -32,6 +31,7 @@ namespace FoodTrack.Controllers
 
                 var order = new Order
                 {
+                    Id = 1,
                     CreatedAt = DateTime.Now,
                     Category = new Category { Id = 1, Name = "Groceries" },
                     CategoryId = 1,
