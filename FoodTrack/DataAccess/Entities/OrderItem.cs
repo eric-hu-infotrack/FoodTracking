@@ -13,9 +13,9 @@ namespace FoodTrack.DataAccess.Entities
         public DateTime? LastModified { get; set; }
 
         public int OrderId { get; set; }   //fk
-        public int ItemId { get; set; }    //fk
+        public int CategoryItemId { get; set; }    //fk
         //navigation property
         public virtual Order Order { get; set; }
-        public virtual Item Item { get; set; }
+        public virtual CategoryItem CategoryItem { get; set; }
     }
 }

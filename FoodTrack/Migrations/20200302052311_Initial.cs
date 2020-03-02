@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FoodTrack.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -64,7 +64,7 @@ namespace FoodTrack.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -76,10 +76,10 @@ namespace FoodTrack.Migrations
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedAt = table.Column<DateTime>(nullable: true),
-                    CategoryId = table.Column<int>(nullable: false),
-                    ItemId = table.Column<int>(nullable: false),
                     DefaultToOrderNumber = table.Column<int>(nullable: false),
-                    FrequencyRate = table.Column<int>(nullable: false)
+                    FrequencyRate = table.Column<int>(nullable: false),
+                    CategoryId = table.Column<int>(nullable: false),
+                    ItemId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -89,13 +89,13 @@ namespace FoodTrack.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_CategoryItems_Items_ItemId",
                         column: x => x.ItemId,
                         principalTable: "Items",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -111,23 +111,23 @@ namespace FoodTrack.Migrations
                     QuantityNeeded = table.Column<int>(nullable: false),
                     LastModified = table.Column<DateTime>(nullable: true),
                     OrderId = table.Column<int>(nullable: false),
-                    ItemId = table.Column<int>(nullable: false)
+                    CategoryItemId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_OrderItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OrderItems_Items_ItemId",
-                        column: x => x.ItemId,
-                        principalTable: "Items",
+                        name: "FK_OrderItems_CategoryItems_CategoryItemId",
+                        column: x => x.CategoryItemId,
+                        principalTable: "CategoryItems",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_OrderItems_Orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Orders",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -141,9 +141,9 @@ namespace FoodTrack.Migrations
                 column: "ItemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderItems_ItemId",
+                name: "IX_OrderItems_CategoryItemId",
                 table: "OrderItems",
-                column: "ItemId");
+                column: "CategoryItemId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderItems_OrderId",
@@ -159,16 +159,16 @@ namespace FoodTrack.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CategoryItems");
-
-            migrationBuilder.DropTable(
                 name: "OrderItems");
 
             migrationBuilder.DropTable(
-                name: "Items");
+                name: "CategoryItems");
 
             migrationBuilder.DropTable(
                 name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "Items");
 
             migrationBuilder.DropTable(
                 name: "Categories");

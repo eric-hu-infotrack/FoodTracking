@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodTrack.Migrations
 {
     [DbContext(typeof(FoodTrackDbContext))]
-    [Migration("20200302042512_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200302052311_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -125,13 +125,13 @@ namespace FoodTrack.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CategoryItemId");
+
                     b.Property<DateTime>("CreatedAt");
 
                     b.Property<DateTime?>("DeletedAt");
 
                     b.Property<bool>("IsDeleted");
-
-                    b.Property<int>("ItemId");
 
                     b.Property<DateTime?>("LastModified");
 
@@ -143,7 +143,7 @@ namespace FoodTrack.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ItemId");
+                    b.HasIndex("CategoryItemId");
 
                     b.HasIndex("OrderId");
 
@@ -155,12 +155,12 @@ namespace FoodTrack.Migrations
                     b.HasOne("FoodTrack.DataAccess.Entities.Category", "Category")
                         .WithMany("CategoryItems")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("FoodTrack.DataAccess.Entities.Item", "Item")
                         .WithMany("CategoryItems")
                         .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("FoodTrack.DataAccess.Entities.Order", b =>
@@ -168,20 +168,20 @@ namespace FoodTrack.Migrations
                     b.HasOne("FoodTrack.DataAccess.Entities.Category", "Category")
                         .WithMany("Orders")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("FoodTrack.DataAccess.Entities.OrderItem", b =>
                 {
-                    b.HasOne("FoodTrack.DataAccess.Entities.Item", "Item")
-                        .WithMany()
-                        .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("FoodTrack.DataAccess.Entities.CategoryItem", "CategoryItem")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("CategoryItemId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("FoodTrack.DataAccess.Entities.Order", "Order")
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }
