@@ -4,14 +4,16 @@ using FoodTrack.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FoodTrack.Migrations
 {
     [DbContext(typeof(FoodTrackDbContext))]
-    partial class FoodTrackDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200302062453_AddRowNumberToCategoryItemTable")]
+    partial class AddRowNumberToCategoryItemTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
