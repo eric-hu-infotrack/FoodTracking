@@ -70,9 +70,9 @@ namespace FoodTrack.Services
             worksheet.Range["B1"].Text = order.CreatedAt.DayOfWeek.ToString();
 
             foreach (var item in order.OrderItems) {
-                var cell_expected = Expected_Column_Char + item.CategoryItem.Id; //Change id for new prop
-                var cell_counted = Counted_Column_Char + item.CategoryItem.Id;
-                var cell_toOrder = ToOrder_Column_Char + item.CategoryItem.Id;
+                var cell_expected = Expected_Column_Char + item.CategoryItem.RowOrder;
+                var cell_counted = Counted_Column_Char + item.CategoryItem.RowOrder;
+                var cell_toOrder = ToOrder_Column_Char + item.CategoryItem.RowOrder;
 
                 worksheet.Range[cell_expected].Text = item.QuantityNeeded.ToString();
                 worksheet.Range[cell_counted].Text = item.CategoryItem.Item.Quantity.ToString();

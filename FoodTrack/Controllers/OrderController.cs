@@ -23,12 +23,6 @@ namespace FoodTrack.Controllers
         public IActionResult Post(){
             try
             {
-                //Defining the ContentType for excel file.
-                string ContentType = "Application/msexcel";
-
-                //Define the file name.
-                string fileName = "Order-list.xlsx";
-
                 var order = new Order
                 {
                     Id = 1,
@@ -40,13 +34,13 @@ namespace FoodTrack.Controllers
                         Id = 1,
                         QuantityNeeded = 5,
                         QuantityToOrder = 3,
-                        CategoryItem = new CategoryItem{ Id = 4, Item = new Item{ Quantity = 2} }
+                        CategoryItem = new CategoryItem{ Id = 1, Item = new Item{ Quantity = 2} , RowOrder=4 }
                     },
                     new OrderItem(){
                         Id = 2,
                         QuantityNeeded = 6,
                         QuantityToOrder = 4,
-                        CategoryItem = new CategoryItem{ Id = 5, Item = new Item{ Quantity = 2} }
+                        CategoryItem = new CategoryItem{ Id = 5, Item = new Item{ Quantity = 2}, RowOrder=5}
                     }
                 }
                 };
@@ -58,7 +52,7 @@ namespace FoodTrack.Controllers
                     _emailService.SendEmail(filePath, order.Category.Name);
                 }
 
-                return Ok(filePath);
+                return Ok("Email Sent");
 
             }
             catch (Exception ex) {
