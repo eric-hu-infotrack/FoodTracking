@@ -7,7 +7,6 @@ import '../../common.less';
 import {
   STORE_DASHBOARD,
   STORE_ROUTER,
-  TodoFilter
 } from 'app/constants';
 
 export interface DashboardProps extends RouteComponentProps {
@@ -17,7 +16,6 @@ export interface DashboardProps extends RouteComponentProps {
 }
 
 export interface TodoAppState {
-  filter: TodoFilter;
 }
 
 @inject(STORE_DASHBOARD, STORE_ROUTER)
@@ -25,7 +23,6 @@ export interface TodoAppState {
 export class Dashboard extends React.Component<DashboardProps, TodoAppState> {
   constructor(props: DashboardProps, context: any) {
     super(props, context);
-    this.state = { filter: TodoFilter.ALL };
   }
 
   componentWillMount() {
