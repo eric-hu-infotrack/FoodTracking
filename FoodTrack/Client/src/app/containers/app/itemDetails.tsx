@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Row, Card } from 'antd';
-// import { PlusCircleOutlined, MinusCircleOutlined } from '@ant-design/icons';
+import { Row, Card, Col } from 'antd';
 import { Item } from '../../stores/dashboardStore';
 
 export interface IItemDetail {
@@ -11,7 +10,7 @@ export default class ItemDetail extends React.Component<IItemDetail> {
     public render() {
         console.log('rendering');
         return (
-            <Card>
+            <Card className="itemDetail">
                 <Row>
                     <img
                         alt="example"
@@ -21,15 +20,15 @@ export default class ItemDetail extends React.Component<IItemDetail> {
                 <Row>
                     <h1>{this.props.item.name}</h1>
                 </Row>
-                {/* <Row>
-                    <Col> <PlusCircleOutlined /></Col>
+                <Row>
+                    <Col> +</Col>
                     <Col> {this.props.item.inputNumber}</Col>
-                    <Col> <MinusCircleOutlined /></Col>
+                    <Col> -</Col>
                 </Row>
                 <Row>
                     <Col> {this.props.item.expectedNumber}</Col>
                     <Col> {this.props.item.expectedNumber - this.props.item.inputNumber}</Col>
-                </Row> */}
+                </Row>
             </Card>
         );
     }

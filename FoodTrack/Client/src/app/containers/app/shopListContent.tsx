@@ -4,6 +4,7 @@ import ItemDetail from './itemDetails';
 import { RouteComponentProps } from 'react-router';
 import { inject } from 'mobx-react';
 import { STORE_DASHBOARD } from 'app/constants';
+import { Row, Col } from 'antd';
 
 export interface IShopListContentProps extends RouteComponentProps {
 }
@@ -16,9 +17,11 @@ export default class ShopListContent extends React.Component<IShopListContentPro
         const shopList = dashboardStore.shopLists.filter(x => x.id === id)[0]
 
         return (
-            <div className="shopListContent">
+            <Row className="shopListContent">
+                <Col span={8}>
                 {shopList.items.map(e => <ItemDetail item={e} />)}
-            </div>
+                </Col>
+            </Row>
         );
     }
 }
