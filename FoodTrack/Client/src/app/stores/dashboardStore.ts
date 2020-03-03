@@ -8,13 +8,22 @@ export class DashboardStore {
             this.shopLists.push(e);
         });
     }
+
+    @action
+    async getdata() {
+        let test = await fetch("https://localhost:44368/api/categories").then(res => res.json());
+        console.log(test);
+        test.items.map(e => {
+            this.shopLists.push(new ShopList(e.id,e.name,shopListStatus.ordered));
+          });
+    }
 }
 
 export class ShopList {
-    id: number;
-    name: string;
-    status: shopListStatus;
-    items: Item[];
+    @observable id: number;
+    @observable name: string;
+    @observable status: shopListStatus;
+    @observable items: Item[];
 
     constructor(id: number, name: string, status: shopListStatus) {
         this.id = id;
@@ -30,6 +39,15 @@ export class ShopList {
         this.items.push(new Item('bread', 'https://cdn0.woolworths.media/content/wowproductimages/large/095872.jpg', 2))
         this.items.push(new Item('bread', 'https://cdn0.woolworths.media/content/wowproductimages/large/095872.jpg', 2))
         
+    }
+
+    @action
+    async getdata(id:number) {
+        let test = await fetch("https://localhost:44368/api/categoryitems?categoryid="+id).then(res => res.json());
+        console.log(test);
+        test.items.map(e => {
+            this.items.push(new Item(e.id,e.name,shopListStatus.ordered));
+          });
     }
 }
 

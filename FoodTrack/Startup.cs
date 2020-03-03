@@ -30,6 +30,11 @@ namespace FoodTrack
             services.AddDbContext<FoodTrackDbContext>(options =>
                                          options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddCors(options => options.AddPolicy("SpaOnly", b =>
+              b.WithOrigins("http://localhost:3222")
+              .AllowAnyMethod()
+              .AllowAnyHeader()));
+
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
@@ -81,6 +86,8 @@ namespace FoodTrack
             }
             app.UseStaticFiles();
             app.UseHttpsRedirection();
+
+            app.UseCors("SpaOnly");
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger(o =>

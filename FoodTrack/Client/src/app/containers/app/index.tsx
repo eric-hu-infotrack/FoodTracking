@@ -27,6 +27,8 @@ export class Dashboard extends React.Component<DashboardProps, TodoAppState> {
   }
 
   componentWillMount() {
+    const dashboardStore = this.props[STORE_DASHBOARD] as DashboardStore;
+    dashboardStore.getdata();
   }
 
   handleClick(index: number) {

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { DashboardStore } from '../../stores/dashboardStore';
 import ItemDetail from './itemDetails';
 import { RouteComponentProps } from 'react-router';
-import { inject } from 'mobx-react';
+import { inject, observer } from 'mobx-react';
 import { STORE_DASHBOARD } from 'app/constants';
 import { Row, Col, Button } from 'antd';
 import { DownloadOutlined, RollbackOutlined } from '@ant-design/icons/lib/icons';
@@ -11,7 +11,14 @@ export interface IShopListContentProps extends RouteComponentProps {
 }
 
 @inject(STORE_DASHBOARD)
+@observer
 export default class ShopListContent extends React.Component<IShopListContentProps> {
+    componentWillMount(){
+        const dashboardStore = this.props[STORE_DASHBOARD] as DashboardStore;
+        let id = parseInt(this.props.match.params['id']);
+        const shopList = dashboardStore.shopLists.filter(x => x.id === id)[0]
+        shopList.getdata(id);
+    }
     public render() {
         const dashboardStore = this.props[STORE_DASHBOARD] as DashboardStore;
         let id = parseInt(this.props.match.params['id']);
