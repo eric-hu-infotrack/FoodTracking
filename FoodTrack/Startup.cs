@@ -1,4 +1,7 @@
-﻿using FoodTrack.DataAccess;
+﻿using System;
+using System.IO;
+using System.Reflection;
+using FoodTrack.DataAccess;
 using FoodTrack.DataAccess.Data;
 using FoodTrack.Services;
 using Microsoft.AspNetCore.Builder;
@@ -7,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace FoodTrack
 {
@@ -26,6 +30,26 @@ namespace FoodTrack
             services.AddDbContext<FoodTrackDbContext>(options =>
                                          options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.CustomOperationIds(e => $"{e.ActionDescriptor.RouteValues["controller"]}_{e.ActionDescriptor.RouteValues["action"]}");
+                c.SwaggerDoc("v1", new Info
+                {
+                    Title = "FoodTrack - API",
+                    Version = "v1"
+                });
+
+
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var baseDirectory = AppContext.BaseDirectory;
+                var xmlPath = Path.Combine(baseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+                // Enable Annotations
+                c.EnableAnnotations();
+            });
+
             services.AddRouting(options =>
             {
                 options.LowercaseUrls = true;
@@ -33,6 +57,8 @@ namespace FoodTrack
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+
             services.AddTransient<IExcelService, ExcelService>();
             services.AddTransient<IEmailService, EmailService>();
 
@@ -55,6 +81,22 @@ namespace FoodTrack
             }
             app.UseStaticFiles();
             app.UseHttpsRedirection();
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger(o =>
+            {
+                o.RouteTemplate = "docs/{documentName}/docs.json";
+            });
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(o =>
+            {
+                o.DocumentTitle = "Swagger UI - FoodTrack";
+                o.SwaggerEndpoint("/docs/v1/docs.json", "FoodTrack - API");
+                o.RoutePrefix = "docs";
+                o.DisplayOperationId();
+            });
             app.UseMvc();
         }
     }

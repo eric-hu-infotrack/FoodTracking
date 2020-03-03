@@ -75,8 +75,7 @@ namespace FoodTrack.Services
                 var cell_toOrder = ToOrder_Column_Char + item.CategoryItem.RowOrder;
 
                 worksheet.Range[cell_expected].Text = item.QuantityNeeded.ToString();
-                worksheet.Range[cell_counted].Text = item.CategoryItem.Item.Quantity.ToString();
-                worksheet.Range[cell_toOrder].Text = item.QuantityToOrder.ToString();
+                worksheet.Range[cell_counted].Text = item.CategoryItem.Item.QuantityInTotal.ToString();
             }
 
             //Creating stream object.
