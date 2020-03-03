@@ -30,7 +30,7 @@ export default class ShopListContent extends React.Component<IShopListContentPro
                 <Row gutter={30}>
                     {shopList.items.map(e => <Col span={8}><ItemDetail item={e} /></Col>)}
                 </Row>
-                <Row className="exportButton" justify="center"> <Button size={'large'} icon={<DownloadOutlined />} >Save & Export</Button> </Row>
+                <Row className="exportButton" justify="center"> <Button onClick={()=>shopList.save()} size={'large'} icon={<DownloadOutlined />} >Save & Export</Button> </Row>
             </div>
         );
     }

@@ -37,10 +37,33 @@ export class ShopList {
         let test = await fetch("https://localhost:44368/api/categoryitems?categoryid="+id).then(res => res.json());
         console.log(test);
         test.items.map(e => {
-            this.items.push(new Item(e.itemName,e.itemProfilePath, e.defaultQuantityNeeded));
+            this.items.push(new Item(e.id,e.itemName,e.itemProfilePath, e.defaultQuantityNeeded));
           });
     }
+
+    @action
+    async save(){
+        let request:item[] = this.items.map(e=> new item(e.inputNumber,e.expectedNumber,+e.id))
+        let newrequest = {orderItemCreateRequests: request};
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'https://localhost:44368/api/orders');
+        xhr.setRequestHeader("Content-type", "application/json");
+        xhr.send(JSON.stringify(newrequest));
+    }
 }
+
+class item {
+    availableQuantity:number;
+    quantityNeeded:number;
+    categoryItemId:number;
+
+    constructor(a:number,n:number,id:number){
+        this.availableQuantity = a;
+        this.quantityNeeded = n;
+        this.categoryItemId = id;
+    }
+}
+
 
 export enum shopListStatus {
     ordered,
@@ -48,12 +71,14 @@ export enum shopListStatus {
 }
 
 export class Item {
+    id:string;
     name: string;
     expectedNumber: number;
     @observable inputNumber: number;
     imageUrl: string;
 
-    constructor(name: string, imageUrl: string, expectedNumber: number) {
+    constructor(id:string,name: string, imageUrl: string, expectedNumber: number) {
+        this.id = id;
         this.name = name;
         this.expectedNumber = expectedNumber;
         this.imageUrl = imageUrl;
