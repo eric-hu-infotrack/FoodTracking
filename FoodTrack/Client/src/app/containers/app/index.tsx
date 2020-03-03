@@ -10,7 +10,7 @@ import {
   TodoFilter
 } from 'app/constants';
 
-export interface DashboardProps extends RouteComponentProps<any> {
+export interface DashboardProps extends RouteComponentProps {
   /** MobX Stores will be injected via @inject() **/
   // [STORE_ROUTER]: RouterStore;
   // [STOURE_TODO]: TodoStore;
@@ -31,13 +31,19 @@ export class Dashboard extends React.Component<DashboardProps, TodoAppState> {
   componentWillMount() {
   }
 
+  handleClick(index: number) {
+    this.props.history.push('/shopList/' + index);
+  }
+
   render() {
     const dashboardStore = this.props[STORE_DASHBOARD] as DashboardStore;
 
     return (
-      <div>
+      <div className="dashboard">
         {dashboardStore.shopLists.map(e =>
-          <ShopListCard shopList={e} />
+          <div  key={e.name} onClick={() => this.handleClick(e.id)}>
+            <ShopListCard shopList={e} />
+          </div>
         )}
       </div>
     );
