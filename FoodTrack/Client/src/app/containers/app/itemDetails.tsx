@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Row, Card, Col, Input } from 'antd';
 import { Item } from '../../stores/dashboardStore';
 import { observer } from 'mobx-react';
+import { PlusCircleOutlined, MinusCircleOutlined } from '@ant-design/icons';
 
 export interface IItemDetail {
     item: Item
@@ -24,11 +25,10 @@ export default class ItemDetail extends React.Component<IItemDetail> {
                     <h1>{this.props.item.name}</h1>
                 </Row>
                 <Row>
-                    <Col span={8}><span onClick={(e) => this.props.item.changeNumber(this.props.item.inputNumber + 1)}> +</span></Col>
-                    {/* <Col span={8}><InputNumber min={0} max={50} value= {this.props.item.inputNumber} defaultValue={this.props.item.inputNumber} onChange={(e) => this.props.item.changeNumber(e)} /> </Col> */}
-                    <Col span={8}><Input min={0} max={50} value={this.props.item.inputNumber} onChange={(e) => this.props.item.changeNumber(+e.target.value)} /> </Col>
-
-                    <Col span={8}><span onClick={(e) => this.props.item.changeNumber(this.props.item.inputNumber - 1)}> -</span></Col>
+                    
+                    <Col span={8}><span className="icon" onClick={(e) => this.props.item.changeNumber(this.props.item.inputNumber + 1)}> <PlusCircleOutlined /></span></Col>
+                    <Col span={8}><Input min={0} max={50} value= {this.props.item.inputNumber} defaultValue={this.props.item.inputNumber} onChange={(e) => this.props.item.changeNumber(+e.target.value)} /> </Col>
+                    <Col span={8}><span className="icon" onClick={(e) => this.props.item.changeNumber(this.props.item.inputNumber - 1)}> <MinusCircleOutlined /> </span></Col>
                 </Row>
                 <Row>
                     <Col span={12}>

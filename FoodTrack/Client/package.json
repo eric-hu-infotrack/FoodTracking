@@ -15,8 +15,8 @@
     "@babel/core": "^7.2.2",
     "@types/classnames": "^2.2.7",
     "@types/node": "^10.12.18",
-    "@types/react": "^16.7.20",
-    "@types/react-dom": "^16.0.11",
+    "@types/react": "^16.9.23",
+    "@types/react-dom": "^16.9.5",
     "@types/react-router": "^4.4.3",
     "@types/webpack": "^4.4.23",
     "babel-loader": "^8.0.5",
@@ -54,8 +54,8 @@
     "mobx": "^5.8.0",
     "mobx-react": "^5.4.3",
     "mobx-react-router": "^4.0.5",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
     "react-router": "^4.3.1"
   }
 }

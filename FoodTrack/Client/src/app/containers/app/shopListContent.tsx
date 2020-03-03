@@ -4,7 +4,8 @@ import ItemDetail from './itemDetails';
 import { RouteComponentProps } from 'react-router';
 import { inject } from 'mobx-react';
 import { STORE_DASHBOARD } from 'app/constants';
-import { Row, Col } from 'antd';
+import { Row, Col, Button } from 'antd';
+import { DownloadOutlined } from '@ant-design/icons/lib/icons';
 
 export interface IShopListContentProps extends RouteComponentProps {
 }
@@ -17,11 +18,13 @@ export default class ShopListContent extends React.Component<IShopListContentPro
         const shopList = dashboardStore.shopLists.filter(x => x.id === id)[0]
 
         return (
-            <Row className="shopListContent">
-                <Col span={8}>
-                {shopList.items.map(e => <ItemDetail item={e} />)}
-                </Col>
-            </Row>
+            <div className="shopListContent">
+                <Row  gutter={30}>
+                    {shopList.items.map(e => <Col span={8}><ItemDetail item={e} /></Col>)}
+                </Row>
+                <Row className="exportButton" justify="center"> <Button size={'large'} icon={<DownloadOutlined />} >Save & Export</Button> </Row>
+            </div>
+
         );
     }
 }

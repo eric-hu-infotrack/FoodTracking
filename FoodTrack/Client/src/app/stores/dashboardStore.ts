@@ -22,6 +22,14 @@ export class ShopList {
         this.status = status;
         this.items = [];
         this.items.push(new Item('bread', 'https://cdn0.woolworths.media/content/wowproductimages/large/095872.jpg', 2))
+        this.items.push(new Item('bread', 'https://cdn0.woolworths.media/content/wowproductimages/large/095872.jpg', 2))
+        this.items.push(new Item('bread', 'https://cdn0.woolworths.media/content/wowproductimages/large/095872.jpg', 2))
+        this.items.push(new Item('bread', 'https://cdn0.woolworths.media/content/wowproductimages/large/095872.jpg', 2))
+        this.items.push(new Item('bread', 'https://cdn0.woolworths.media/content/wowproductimages/large/095872.jpg', 2))
+        this.items.push(new Item('bread', 'https://cdn0.woolworths.media/content/wowproductimages/large/095872.jpg', 2))
+        this.items.push(new Item('bread', 'https://cdn0.woolworths.media/content/wowproductimages/large/095872.jpg', 2))
+        this.items.push(new Item('bread', 'https://cdn0.woolworths.media/content/wowproductimages/large/095872.jpg', 2))
+        
     }
 }
 
