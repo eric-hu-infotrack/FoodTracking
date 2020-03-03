@@ -4,6 +4,7 @@ import { RouteComponentProps } from 'react-router';
 import { DashboardStore } from '../../stores/dashboardStore';
 import ShopListCard from './shopListCard';
 import '../../common.less';
+import { Row } from 'antd';
 import {
   STORE_DASHBOARD,
   STORE_ROUTER,
@@ -37,6 +38,9 @@ export class Dashboard extends React.Component<DashboardProps, TodoAppState> {
 
     return (
       <div className="dashboard">
+        <Row className="logo" justify="center">
+          <img src="../../../assets/logo.png"></img>
+        </Row>
         {dashboardStore.shopLists.map(e =>
           <div  key={e.name} onClick={() => this.handleClick(e.id)}>
             <ShopListCard shopList={e} />
