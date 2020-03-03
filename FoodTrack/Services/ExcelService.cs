@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
 using FoodTrack.DataAccess.Entities;
+using FoodTrack.Enums;
 using Syncfusion.XlsIO;
-using static FoodTrack.Enums.EnumsModel;
 
 namespace FoodTrack.Services
 {
