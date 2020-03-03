@@ -8,6 +8,7 @@ using FoodTrack.DataAccess.Entities;
 using FoodTrack.ModelMappers;
 using FoodTrack.Models.Requests;
 using FoodTrack.Models.Responses;
+using FoodTrack.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,10 +17,15 @@ namespace FoodTrack.Controllers
     public class OrdersController : ApiBaseController
     {
         private readonly FoodTrackDbContext db;
+        private readonly IExcelService _excelService;
+        private readonly IEmailService _emailService;
 
-        public OrdersController(FoodTrackDbContext db)
+
+        public OrdersController(FoodTrackDbContext db, IExcelService excelService, IEmailService emailService)
         {
             this.db = db;
+            this._excelService = excelService;
+            this._emailService = emailService;
         }
 
         /// <summary>
@@ -47,9 +53,6 @@ namespace FoodTrack.Controllers
             OrderResponse orderResponse = OrderMapper.MapFromOrderToOrderResponse(order);
             return Ok(orderResponse);
         }
-
-        public async Task
-
 
         [HttpPost]
         [ProducesResponseType(typeof(OrderResponse), 201)]

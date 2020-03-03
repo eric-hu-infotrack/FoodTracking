@@ -9,7 +9,7 @@ namespace FoodTrack.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OrderController : ControllerBase
+    public class OrderController : ApiBaseController
     {
         private IExcelService _excelService { get; set; }
         private IEmailService _emailService { get; set; }
