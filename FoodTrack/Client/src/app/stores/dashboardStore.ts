@@ -44,7 +44,7 @@ export class ShopList {
     @action
     async save(){
         let request:item[] = this.items.map(e=> new item(e.inputNumber,e.expectedNumber,+e.id))
-        let newrequest = {orderItemCreateRequests: request};
+        let newrequest = {orderItemCreateRequests: request,categoryId:this.id};
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'https://localhost:44368/api/orders');
         xhr.setRequestHeader("Content-type", "application/json");

@@ -57,7 +57,8 @@ namespace FoodTrack.ModelMappers
                 CreatedAt = utcNow,
                 Status = OrderStatus.Created,
                 LastModified = utcNow,
-                OrderItems = new List<OrderItem>()
+                OrderItems = new List<OrderItem>(),
+                CategoryId = orderCreateRequest.CategoryId
             };
             foreach (var orderItemCreateRequest in orderCreateRequest.OrderItemCreateRequests)
             {

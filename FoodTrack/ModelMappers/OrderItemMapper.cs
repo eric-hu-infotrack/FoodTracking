@@ -41,7 +41,8 @@ namespace FoodTrack.ModelMappers
                 CreatedAt = utcNow,
                 LastModified = utcNow,
                 QuantityNeeded = orderItemCreateRequest.QuantityNeeded,
-                AvailableQuantity = orderItemCreateRequest.AvailableQuantity   //user input
+                AvailableQuantity = orderItemCreateRequest.AvailableQuantity,   //user input
+                CategoryItemId = orderItemCreateRequest.CategoryItemId
             };
             return orderItem;
         }

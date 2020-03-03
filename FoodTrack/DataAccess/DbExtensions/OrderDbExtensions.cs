@@ -17,6 +17,7 @@ namespace FoodTrack.DataAccess.DbExtensions
         public static IQueryable<Order> IncludeAll(this IQueryable<Order> source)
         {
             return source
+                .Include(o => o.Category)
                 .Include(o => o.OrderItems)
                     .ThenInclude(oi => oi.CategoryItem.Item)
                 .Include(o => o.OrderItems)

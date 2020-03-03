@@ -68,11 +68,11 @@ namespace FoodTrack.Controllers
 
             Order createdOrder = await db.Orders.IncludeAll().AsNoTracking().SingleOrDefaultAsync(o => o.Id == order.Id);
 
-            var filePath = _excelService.CreateAndSaveFile(order);
+            var filePath = _excelService.CreateAndSaveFile(createdOrder);
 
             if (!string.IsNullOrEmpty(filePath))
             {
-                _emailService.SendEmail(filePath, order.Category.Name);
+                _emailService.SendEmail(filePath, createdOrder.Category.Name);
             }
 
             //map to response
