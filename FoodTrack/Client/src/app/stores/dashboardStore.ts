@@ -1,4 +1,4 @@
-import { observable } from 'mobx';
+import { observable, action } from 'mobx';
 export class DashboardStore {
     @observable shopLists: ShopList[];
 
@@ -33,12 +33,19 @@ export enum shopListStatus {
 export class Item {
     name: string;
     expectedNumber: number;
-    inputNumber: number;
+    @observable inputNumber: number;
     imageUrl: string;
 
     constructor(name: string, imageUrl: string, expectedNumber: number) {
         this.name = name;
         this.expectedNumber = expectedNumber;
         this.imageUrl = imageUrl;
+        this.inputNumber = 0;
+    }
+
+    @action
+    changeNumber(value: number) {
+        value = value < 0 ? 0 : value;
+        this.inputNumber = value;
     }
 }
