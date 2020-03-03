@@ -31,6 +31,8 @@ namespace FoodTrack.ModelMappers
             CategoryItemResponseIndividual categoryItemResponseIndividual = new CategoryItemResponseIndividual
             {
                 Id = categoryItem.Id,
+                ItemName = categoryItem.Item.Name,
+                ItemProfilePath = categoryItem.Item.ProfilePath,
                 DefaultQuantityNeeded = categoryItem.DefaultQuantityNeeded,
                 FrequencyRate = categoryItem.FrequencyRate,
                 RowOrder = categoryItem.RowOrder,

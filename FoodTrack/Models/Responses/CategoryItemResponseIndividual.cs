@@ -8,6 +8,8 @@ namespace FoodTrack.Models.Responses
     public class CategoryItemResponseIndividual
     {
         public int Id { get; set; }
+        public string ItemName { get; set; }
+        public string ItemProfilePath { get; set; }
         public int DefaultQuantityNeeded { get; set; }
         public int FrequencyRate { get; set; }   //how many times per week
         public int RowOrder { get; set; }      //a number indicating list order in ui

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FoodTrack.DataAccess.Data;
 using FoodTrack.DataAccess.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace FoodTrack.Services
 {
@@ -24,7 +25,7 @@ namespace FoodTrack.Services
 
         IQueryable<CategoryItem> ICategoryItemService.GetCategoryItemsForCategory(int? categoryId)
         {
-            var categoryItems = db.CategoryItems.Where(ci => ci.CategoryId == categoryId).OrderBy(ci => ci.RowOrder);
+            var categoryItems = db.CategoryItems.Where(ci => ci.CategoryId == categoryId).Include(ci => ci.Item).OrderBy(ci => ci.RowOrder);
             return categoryItems;
         }
     }

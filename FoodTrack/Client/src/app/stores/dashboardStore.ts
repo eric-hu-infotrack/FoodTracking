@@ -30,15 +30,6 @@ export class ShopList {
         this.name = name;
         this.status = status;
         this.items = [];
-        this.items.push(new Item('bread', 'https://cdn0.woolworths.media/content/wowproductimages/large/095872.jpg', 2))
-        this.items.push(new Item('bread', 'https://cdn0.woolworths.media/content/wowproductimages/large/095872.jpg', 2))
-        this.items.push(new Item('bread', 'https://cdn0.woolworths.media/content/wowproductimages/large/095872.jpg', 2))
-        this.items.push(new Item('bread', 'https://cdn0.woolworths.media/content/wowproductimages/large/095872.jpg', 2))
-        this.items.push(new Item('bread', 'https://cdn0.woolworths.media/content/wowproductimages/large/095872.jpg', 2))
-        this.items.push(new Item('bread', 'https://cdn0.woolworths.media/content/wowproductimages/large/095872.jpg', 2))
-        this.items.push(new Item('bread', 'https://cdn0.woolworths.media/content/wowproductimages/large/095872.jpg', 2))
-        this.items.push(new Item('bread', 'https://cdn0.woolworths.media/content/wowproductimages/large/095872.jpg', 2))
-        
     }
 
     @action
@@ -46,7 +37,7 @@ export class ShopList {
         let test = await fetch("https://localhost:44368/api/categoryitems?categoryid="+id).then(res => res.json());
         console.log(test);
         test.items.map(e => {
-            this.items.push(new Item(e.id,e.name,shopListStatus.ordered));
+            this.items.push(new Item(e.itemName,e.itemProfilePath, e.defaultQuantityNeeded));
           });
     }
 }
