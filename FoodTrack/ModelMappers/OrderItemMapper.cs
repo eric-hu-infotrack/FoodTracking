@@ -26,7 +26,7 @@ namespace FoodTrack.ModelMappers
                 ItemName = item.Name,
                 ItemProfilePath = item.ProfilePath,
                 QuantityNeeded = orderItem.QuantityNeeded > 0 ? orderItem.QuantityNeeded : orderItem.CategoryItem.DefaultQuantityNeeded,
-                AvailableQuantity = item.QuantityInTotal,
+                AvailableQuantity = orderItem.AvailableQuantity,
                 
                 LastModified = orderItem.LastModified
             };
@@ -41,7 +41,7 @@ namespace FoodTrack.ModelMappers
                 CreatedAt = utcNow,
                 LastModified = utcNow,
                 QuantityNeeded = orderItemCreateRequest.QuantityNeeded,
-                AvailableQuantity = orderItemCreateRequest.AvailableQuantity
+                AvailableQuantity = orderItemCreateRequest.AvailableQuantity   //user input
             };
             return orderItem;
         }

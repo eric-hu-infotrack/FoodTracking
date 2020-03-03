@@ -8,6 +8,7 @@ using FoodTrack.DataAccess.Entities;
 using FoodTrack.ModelMappers;
 using FoodTrack.Models.Requests;
 using FoodTrack.Models.Responses;
+using FoodTrack.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,10 +17,15 @@ namespace FoodTrack.Controllers
     public class OrdersController : ApiBaseController
     {
         private readonly FoodTrackDbContext db;
+        private readonly IExcelService _excelService;
+        private readonly IEmailService _emailService;
 
-        public OrdersController(FoodTrackDbContext db)
+
+        public OrdersController(FoodTrackDbContext db, IExcelService excelService, IEmailService emailService)
         {
             this.db = db;
+            this._excelService = excelService;
+            this._emailService = emailService;
         }
 
         /// <summary>
@@ -33,7 +39,7 @@ namespace FoodTrack.Controllers
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetById(int? id)
         {
-            if (id == null)
+            if (id == null)  //create new one
             {
                 return IdNotProvidedBadRequest();
             }
@@ -48,7 +54,6 @@ namespace FoodTrack.Controllers
             return Ok(orderResponse);
         }
 
-
         [HttpPost]
         [ProducesResponseType(typeof(OrderResponse), 201)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
@@ -58,6 +63,7 @@ namespace FoodTrack.Controllers
             //map to entity
             Order order = OrderMapper.MapFromOrderCreateRequestToOrder(requestModel, utcNow);
             db.Orders.Add(order);
+
             await db.SaveChangesAsync();
 
             Order createdOrder = await db.Orders.IncludeAll().AsNoTracking().SingleOrDefaultAsync(o => o.Id == order.Id);
