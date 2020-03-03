@@ -10,6 +10,10 @@ namespace FoodTrack.Constants
         public const string Category = "category";
         public const string Categories = "list_of_categories";
 
+        public const string CategoryItem = "category_item";
+        public const string CategoryItems = "list_of_category_items";
+
+
         public const string Order = "order";
         public const string Orders = "orders";
 

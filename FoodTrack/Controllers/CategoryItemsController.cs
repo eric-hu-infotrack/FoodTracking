@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using FoodTrack.DataAccess.Data;
 using FoodTrack.DataAccess.Entities;
+using FoodTrack.ModelMappers;
+using FoodTrack.Models.Responses;
 using FoodTrack.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,21 +24,25 @@ namespace FoodTrack.Controllers
         }
 
         /// <summary>
-        /// Get all category items
+        /// Get all categorie items for one category
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [ProducesResponseType(typeof(CategoryItemGetAllResponse), 200)]
+        [ProducesResponseType(typeof(ErrorResponse), 400)]
         public async Task<IActionResult> GetAll(int? categoryId)
         {
             if (categoryId == null)
             {
                 return IdNotProvidedBadRequest();
             }
+
             List<CategoryItem> categoryItems = await _categoryItemService.GetCategoryItemsForCategory(categoryId)
                 .AsNoTracking()
                 .ToListAsync();
             //map to response
-            return Ok(categoryItems);
+            CategoryItemGetAllResponse categoryItemGetAllResponse = CategoryItemMapper.MapFromCategoryItemsToCategoryItemGetAllResponse(categoryItems);
+            return Ok(categoryItemGetAllResponse);
         }
 
     }

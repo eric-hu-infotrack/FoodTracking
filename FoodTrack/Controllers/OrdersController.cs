@@ -33,7 +33,7 @@ namespace FoodTrack.Controllers
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetById(int? id)
         {
-            if (id == null)
+            if (id == null)  //create new one
             {
                 return IdNotProvidedBadRequest();
             }
@@ -48,6 +48,8 @@ namespace FoodTrack.Controllers
             return Ok(orderResponse);
         }
 
+        public async Task
+
 
         [HttpPost]
         [ProducesResponseType(typeof(OrderResponse), 201)]
@@ -58,6 +60,7 @@ namespace FoodTrack.Controllers
             //map to entity
             Order order = OrderMapper.MapFromOrderCreateRequestToOrder(requestModel, utcNow);
             db.Orders.Add(order);
+
             await db.SaveChangesAsync();
 
             Order createdOrder = await db.Orders.IncludeAll().AsNoTracking().SingleOrDefaultAsync(o => o.Id == order.Id);
