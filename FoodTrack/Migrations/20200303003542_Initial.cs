@@ -36,7 +36,7 @@ namespace FoodTrack.Migrations
                     DeletedAt = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     ProfilePath = table.Column<string>(nullable: true),
-                    Quantity = table.Column<int>(nullable: false)
+                    QuantityInTotal = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -76,8 +76,9 @@ namespace FoodTrack.Migrations
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedAt = table.Column<DateTime>(nullable: true),
-                    DefaultToOrderNumber = table.Column<int>(nullable: false),
+                    DefaultQuantityNeeded = table.Column<int>(nullable: false),
                     FrequencyRate = table.Column<int>(nullable: false),
+                    RowOrder = table.Column<int>(nullable: false),
                     CategoryId = table.Column<int>(nullable: false),
                     ItemId = table.Column<int>(nullable: false)
                 },
@@ -107,7 +108,7 @@ namespace FoodTrack.Migrations
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedAt = table.Column<DateTime>(nullable: true),
-                    QuantityToOrder = table.Column<int>(nullable: false),
+                    AvailableQuantity = table.Column<int>(nullable: false),
                     QuantityNeeded = table.Column<int>(nullable: false),
                     LastModified = table.Column<DateTime>(nullable: true),
                     OrderId = table.Column<int>(nullable: false),

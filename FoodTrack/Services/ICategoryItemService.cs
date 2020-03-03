@@ -8,9 +8,11 @@ namespace FoodTrack.Services
 {
     public interface ICategoryItemService
     {
+        IQueryable<CategoryItem> GetCategoryItems();
         /// <summary>
-        /// default ordered by name
+        /// default sorted by row number
         /// </summary>
+        /// <param name="categoryId"></param>
         /// <returns></returns>
         IQueryable<CategoryItem> GetCategoryItemsForCategory(int? categoryId);
     }

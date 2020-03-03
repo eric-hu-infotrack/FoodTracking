@@ -9,7 +9,7 @@ namespace FoodTrack.DataAccess.Entities
     {
         public string Name { get; set; }
         public string ProfilePath { get; set; }
-        public int Quantity { get; set; }    //quantity in total
+        public int QuantityInTotal { get; set; }    //quantity in total
 
         //navigation property
         public virtual ICollection<CategoryItem> CategoryItems { get; set; }

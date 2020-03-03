@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 namespace FoodTrack.DataAccess.Entities
 {
     public class OrderItem : BaseEntity
-    { 
-        public int QuantityToOrder { get; set; }   
+    {        
+        public int AvailableQuantity { get; set; }  //quantity available at that point
         public int QuantityNeeded { get; set; }     //total quantity we need
 
         public DateTime? LastModified { get; set; }
