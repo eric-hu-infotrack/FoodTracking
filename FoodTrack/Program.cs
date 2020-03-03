@@ -26,6 +26,7 @@ namespace FoodTrack
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseWebRoot("Content")
                 .UseStartup<Startup>();
 
         private static void SeedAppDb(IWebHost host)

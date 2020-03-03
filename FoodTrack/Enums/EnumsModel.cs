@@ -17,4 +17,14 @@ namespace FoodTrack.Enums
         Updated
     }
 
+    public enum CategoryType
+    {
+        //Match with Category Ids
+        Groceries = 1,
+        SausageDay = 2,
+        BurgerDay = 3,
+        BaconAndEggDay = 4,
+        FridayNight = 5
+    }
+
 }
