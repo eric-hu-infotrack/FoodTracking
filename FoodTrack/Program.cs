@@ -19,7 +19,7 @@ namespace FoodTrack
             var host = CreateWebHostBuilder(args).Build();
 
             //seed database (also auto-update pending migrations if there is any)
-            //SeedAppDb(host);
+            SeedAppDb(host);
 
             host.Run();
         }

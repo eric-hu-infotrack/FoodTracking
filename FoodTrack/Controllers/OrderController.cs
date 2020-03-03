@@ -19,7 +19,7 @@ namespace FoodTrack.Controllers
             _emailService = emailService;
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult Post(){
             try
             {
@@ -33,14 +33,12 @@ namespace FoodTrack.Controllers
                     new OrderItem(){
                         Id = 1,
                         QuantityNeeded = 5,
-                        QuantityToOrder = 3,
-                        CategoryItem = new CategoryItem{ Id = 1, Item = new Item{ Quantity = 2} , RowOrder=4 }
+                        CategoryItem = new CategoryItem{ Id = 1, Item = new Item{ QuantityInTotal = 2} , RowOrder=4 }
                     },
                     new OrderItem(){
                         Id = 2,
                         QuantityNeeded = 6,
-                        QuantityToOrder = 4,
-                        CategoryItem = new CategoryItem{ Id = 5, Item = new Item{ Quantity = 2}, RowOrder=5}
+                        CategoryItem = new CategoryItem{ Id = 5, Item = new Item{ QuantityInTotal = 2}, RowOrder=5}
                     }
                 }
                 };
