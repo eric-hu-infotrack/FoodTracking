@@ -22,7 +22,7 @@ namespace FoodTrack.Controllers
         }
 
         /// <summary>
-        /// Get all cost centres
+        /// Get all category items
         /// </summary>
         /// <returns></returns>
         [HttpGet]

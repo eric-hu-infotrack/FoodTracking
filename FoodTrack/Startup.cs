@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FoodTrack.DataAccess;
 using FoodTrack.DataAccess.Data;
+using FoodTrack.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,7 +33,17 @@ namespace FoodTrack
             services.AddDbContext<FoodTrackDbContext>(options =>
                                          options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddRouting(options =>
+            {
+                options.LowercaseUrls = true;
+                options.LowercaseQueryStrings = true;
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            //application services
+            //entity services
+            services.AddScoped<ICategoryItemService, CategoryItemService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -9,5 +9,6 @@ namespace FoodTrack.Controllers
 {
     public class CategoriesController : Controller
     {
+
     }
 }

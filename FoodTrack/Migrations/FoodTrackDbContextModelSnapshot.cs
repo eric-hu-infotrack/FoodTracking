@@ -50,7 +50,7 @@ namespace FoodTrack.Migrations
 
                     b.Property<DateTime>("CreatedAt");
 
-                    b.Property<int>("DefaultToOrderNumber");
+                    b.Property<int>("DefaultQuantityNeeded");
 
                     b.Property<DateTime?>("DeletedAt");
 
@@ -87,7 +87,7 @@ namespace FoodTrack.Migrations
 
                     b.Property<string>("ProfilePath");
 
-                    b.Property<int>("Quantity");
+                    b.Property<int>("QuantityInTotal");
 
                     b.HasKey("Id");
 
@@ -125,6 +125,8 @@ namespace FoodTrack.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("AvailableQuantity");
+
                     b.Property<int>("CategoryItemId");
 
                     b.Property<DateTime>("CreatedAt");
@@ -138,8 +140,6 @@ namespace FoodTrack.Migrations
                     b.Property<int>("OrderId");
 
                     b.Property<int>("QuantityNeeded");
-
-                    b.Property<int>("QuantityToOrder");
 
                     b.HasKey("Id");
 

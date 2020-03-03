@@ -5,13 +5,16 @@ using System.Threading.Tasks;
 
 namespace FoodTrack.Enums
 {
-    public class EnumsModel
+    public enum OrderStatus
     {
-        public enum OrderStatus
-        {
-            Created,
-            Pending,
-            Finished
-        }
+        Created,
+        Finished
     }
+
+    public enum OrderItemStatus
+    {
+        Untouched,
+        Updated
+    }
+
 }
